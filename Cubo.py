@@ -2,6 +2,25 @@ import numpy as np
 import pygame
 
 
+# ------------------ Forma ---------------------
+
+# Criação dos 4 pontos no espaço 2D
+pontos = np.array(
+    [
+        [350,350],
+        [350,380],
+        [380,350],
+        [380,380]
+     ]
+        )
+
+# Projeção dos pontos no espaço 3D
+
+
+
+
+# ------------------- Canva ---------------------
+
 # Iniciando
 pygame.init()
 
@@ -28,4 +47,10 @@ while True:
             if evento.key == pygame.K_q:
                 pygame.display.quit()
 
-    pygame.display.update()
+
+    # Desenhando pontos
+    for ponto in pontos:
+        pygame.draw.circle(screen, "black", (ponto[0], ponto[1]), 5)
+
+
+    pygame.display.flip()
