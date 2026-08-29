@@ -10,6 +10,9 @@ def norma(vetor):
 
 # ------------------ Forma ---------------------
 
+# Ângulo de rotação
+theta = 0.5
+
 # Criação dos 4 pontos no espaço 2D
 pontos = np.array(
     [
@@ -29,38 +32,38 @@ Matriz_projec = np.array(
         )
 
 # Matrizes de rotação
-def rotacaoX(Matriz, linha1, linha2):
-
+def rotacaoX(Matriz):
     rotX = np.array(
         [
-            [linha1[0]/norma(linha1), linha1[1]/norma(linha), 0],
-            [linha2[0]/norma(linha2), linha2[1]/norma(linha2), 0],
+            [np.cos(theta), -np.sin(theta), 0],
+            [np.sin(theta), np.cos(theta), 0],
             [0,0,0]
         ]
             )
 
-    print(rotX)
+    return Matriz @ rotX
 
-    rotX @ Matriz
-
-
-def rotacaoY(linha1, linha2):
+def rotacaoY(Matriz):
     rotY = np.array(
         [
-            [linha1[0]/norma(linha1), 0, linha1[2]/norma(linha1)],
+            [np.cos(theta), 0, -np.sin(theta)],
             [0,0,0],
-            [linha2[0]/norma(linha2), 0, linha2[2]/norma(linha2)]
+            [np.sin(theta), 0, np.cos(theta)]
         ]
             )
 
+    Matriz @ rotY
 
-def rotacaoZ(linha1, linha2):
+def rotacaoZ(Matriz):
     rotZ = np.array(
         [
-            [],
-            []
+            [0,0,0],
+            [0,np.cos(theta), -np.sin(theta)],
+            [0,np.sin(theta), np.cos(theta)]
         ]
             )
+
+    Matriz @ rotZ
 
 
 
@@ -86,11 +89,12 @@ pygame.display.set_caption("Quadrado")
 # Mostrando superfície enquanto loop estiver ativo
 while True:
     
-    # Verificando se "Q" foi pressionado, se sim fechar janela
+    # Verificando se tecla foi pressionado para ativar alguma ação
     for evento in pygame.event.get():
         if evento.type == pygame.KEYDOWN: # Evento de saída
             if evento.key == pygame.K_q:
                 pygame.display.quit()
+
 
 
     # Desenhando pontos
@@ -102,8 +106,8 @@ while True:
 
         pygame.draw.circle(screen, "black", (projec[0], projec[1]), 5)
 
-        # Rotacionando em relação ao X-axes da matriz de projeção
-        rotacaoX(Matriz_projec, Matriz_projec[0], Matriz_projec[1])
+        # Rotacionando em relação ao X-axis da matriz de pontos 2D
+        Matriz_projec = rotacaoX(Matriz_projec)
 
 
 
