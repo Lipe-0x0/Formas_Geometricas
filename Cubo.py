@@ -5,7 +5,7 @@ from pyglet.math import Mat4
 # ------------------ Formas ---------------------
 
 # Ângulo de rotação
-theta = 0.2
+theta = 0.02
 
 # Raio dos pontos
 raio = 7
@@ -16,10 +16,10 @@ diam = raio*2
 # Criação dos 4 pontos no espaço 2D
 pontos = np.array(
     [
-        [-50,-50,0],
-        [-50,50+diam,0],
-        [50+diam,-50,0],
-        [50+diam,50+diam,0]
+        [-100,-100,0],
+        [-100,100+diam,0],
+        [100+diam,-100,0],
+        [100+diam,100+diam,0]
      ]
        ,dtype = "float64" )
 
@@ -29,8 +29,8 @@ pontos = np.array(
 # Projeção dos pontos no espaço 3D
 Matriz_projec = np.array(
     [
-        [2,0,0],
-        [0,2,0]
+        [1,0,0],
+        [0,1,0]
     ]
        ,dtype = "float64" )
 
@@ -65,9 +65,6 @@ rotX = np.array(
 
 # ------------------- Canva ---------------------
 
-# Frames por segundo(FPS)
-
-
 # Altura e Largura da Tela
 alt = 760
 lar = 760
@@ -101,10 +98,14 @@ def on_draw():
 
         # Rotacionando em relação ao X-axis da matriz de pontos 2D
         pontos[ind,:] = rotX @ ponto
+        
+        # Rotacionando em relação ao Y-axis da matriz de pontos 2D
+        pontos[ind,:] = rotY @ ponto
 
         # Pontos da projeção desenhados
         projec = Matriz_projec @ ponto
         pg.shapes.Circle(x = projec[0], y = projec[1], radius = raio, color=(255,255,255)).draw()
+
 
 
 
