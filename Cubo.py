@@ -18,13 +18,12 @@ pontos = np.array(
     [
         [-100,-100,0],
         [-100,100+diam,0],
-        [100+diam,-100,0],
-        [100+diam,100+diam,0]
+        [100+diam,100+diam,0],
+        [100+diam,-100,0]
      ]
-       ,dtype = "float64" )
+       ,dtype = "float64")
 
 # Criação das arestas
-
 
 # Projeção dos pontos no espaço 3D
 Matriz_projec = np.array(
@@ -100,9 +99,15 @@ def on_draw():
 
         projec = Matriz_projec @ ponto
 
-        pg.shapes.Circle(x = ponto[0], y = ponto[1], radius = raio, color = (255,255,255)).draw()
-        pg.shapes.Circle(x = projec[0], y = projec[1], radius = raio, color = (255,255,255)).draw()
+        pg.shapes.Circle(x = ponto[0], y = ponto[1], radius = raio, color = (230,0,255)).draw()
+        pg.shapes.Circle(x = projec[0], y = projec[1], radius = raio, color = (230,0,255)).draw()
 
+
+        
+        if ind == 3:
+            pg.shapes.Line(x = pontos[ind, :][0], y = pontos[ind, :][1], x2 = pontos[0, :][0], y2 = pontos[0, :][1], color = (255,255,255)).draw()
+        else:
+            pg.shapes.Line(x = pontos[ind, :][0], y = pontos[ind, :][1], x2 = pontos[ind + 1, :][0], y2 = pontos[ind + 1, :][1], color = (255,255,255)).draw()
 
 
 
