@@ -29,8 +29,8 @@ pontos = np.array(
 # Projeção dos pontos no espaço 3D
 Matriz_projec = np.array(
     [
-        [1,0,0],
-        [0,1,0]
+        [1.1,0,0],
+        [0,1.1,0]
     ]
        ,dtype = "float64" )
 
@@ -38,8 +38,8 @@ Matriz_projec = np.array(
 
 rotZ = np.array(
     [
-        [np.cos(theta), np.sin(theta), 0],
-        [-np.sin(theta), np.cos(theta), 0],
+        [np.cos(theta), -np.sin(theta), 0],
+        [np.sin(theta), np.cos(theta), 0],
         [0,0,1]
     ]
         ,dtype = "float64")
@@ -47,18 +47,18 @@ rotZ = np.array(
 
 rotY = np.array(
     [
-        [np.cos(theta), 0, np.sin(theta)],
+        [np.cos(theta), 0, -np.sin(theta)],
         [0,1,0],
-        [-np.sin(theta), 0, np.cos(theta)]
+        [np.sin(theta), 0, np.cos(theta)]
     ]
         ,dtype = "float64")
 
 
 rotX = np.array(
     [
-        [1,0,0],
-        [0,np.cos(theta), np.sin(theta)],
-        [0,-np.sin(theta), np.cos(theta)]
+        [1, 0 ,0],
+        [0, np.cos(theta), -np.sin(theta)],
+        [0, np.sin(theta), np.cos(theta)]
     ]
         ,dtype = "float64")
 
@@ -92,19 +92,17 @@ def on_resize(width, height):
 def on_draw():
     screen.clear()
 
-    for ind, ponto  in enumerate(pontos):
-        # Pontos 2D desenhados
-        pg.shapes.Circle(x = ponto[0], y = ponto[1], radius = raio, color=(255,255,255)).draw()
-
-        # Rotacionando em relação ao X-axis da matriz de pontos 2D
-        pontos[ind,:] = rotX @ ponto
+    for ind, ponto in enumerate(pontos):
         
-        # Rotacionando em relação ao Y-axis da matriz de pontos 2D
-        pontos[ind,:] = rotY @ ponto
+        pontos[ind, :] = rotY @ ponto
+        pontos[ind, :] = rotX @ ponto
+        pontos[ind, :] = rotZ @ ponto
 
-        # Pontos da projeção desenhados
         projec = Matriz_projec @ ponto
-        pg.shapes.Circle(x = projec[0], y = projec[1], radius = raio, color=(255,255,255)).draw()
+
+        pg.shapes.Circle(x = ponto[0], y = ponto[1], radius = raio, color = (255,255,255)).draw()
+        pg.shapes.Circle(x = projec[0], y = projec[1], radius = raio, color = (255,255,255)).draw()
+
 
 
 
