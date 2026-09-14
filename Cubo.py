@@ -84,9 +84,11 @@ def on_draw():
     screen.clear()
 
     for ind in range(pontos.shape[0]):
-
+        
+        # Atualizando pontos ao aplicar as 3 rotações nele
         pontos[ind, :] = rotX @ rotY @ rotZ @ pontos[ind, :]
 
+        # Desenhando pontos na tela
         pg.shapes.Circle(x = pontos[ind, :][0], y = pontos[ind, :][1], radius = raio, color = (230,0,255)).draw()
 
 
