@@ -2,6 +2,15 @@ import numpy as np
 import pyglet as pg
 from pyglet.math import Mat4
 
+
+# ----------------- Funções Complementares -----------------
+
+def arestas(i, j, Matriz):
+    a = Matriz[i, :]
+    b = Matriz[j, :]
+
+    pg.shapes.Line(x = a[0], y = a[1], x2 = b[0], y2 = b[1], color = (255,255,255)).draw()
+
 # ------------------ Formas ---------------------
 
 # Ângulo de rotação
@@ -90,10 +99,20 @@ def on_draw():
 
         # Desenhando pontos na tela
         pg.shapes.Circle(x = pontos[ind, :][0], y = pontos[ind, :][1], radius = raio, color = (230,0,255)).draw()
-
-
-
         
+        arestas(0, 1, pontos)
+        arestas(1, 2, pontos)
+        arestas(2, 3, pontos)
+        arestas(3, 0, pontos)
 
+        arestas(4, 5, pontos)
+        arestas(5, 6, pontos)
+        arestas(6, 7, pontos)
+        arestas(7, 4, pontos)
 
+        arestas(0, 4, pontos)
+        arestas(1, 5, pontos)
+        arestas(2, 6, pontos)
+        arestas(3, 7, pontos)
+    
 pg.app.run()
