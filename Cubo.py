@@ -33,6 +33,9 @@ pontos = np.array(
      ]
        ,dtype = "float64")
 
+# Matriz de Perspectiva
+matriz_perspec = np.zeros((8,2))
+
 
 # Matrizes de rotação
 
@@ -95,28 +98,20 @@ def on_draw():
     for ind in range(pontos.shape[0]):
 
         # Atualizando pontos ao aplicar as 3 rotações nele
-        pontos[ind, :] = rotX @ rotZ @ pontos[ind, :]
+        pontos[ind, :] = rotX @ pontos[ind, :]
 
         # Perspectiva (Ideia geral = 1 / (distancia - z_original))
-        z = 200 / (400 - pontos[ind, :][2])
+        z = 200 / (250 - pontos[ind, :][2])
 
-        matriz_projec = np.array(
-                [
-                    [z,0,0],
-                    [0,z,0],
-                    [0,0,0]
-                ]
-            )
-
-        projec = matriz_projec @ pontos[ind, :]
-
+        matriz_perspec[ind, :] = pontos[ind, 0:2] * z
+        
         # Desenhando pontos na tela
-        pg.shapes.Circle(x = projec[0], y = projec[1], radius = raio, color = (230,0,255)).draw()
+        pg.shapes.Circle(x = matriz_perspec[ind, :][0], y = matriz_perspec[ind, :][1], radius = raio, color = (230,0,255)).draw()
 
     # Desenhando arestas do Cubo
     for i in range(4):
-        arestas(i, (i+1)%4, pontos)
-        arestas(i+4, ((i+1)%4)+4, pontos)
-        arestas(i, i+4, pontos)
+        arestas(i, (i+1)%4, matriz_perspec)
+        arestas(i+4, ((i+1)%4)+4, matriz_perspec)
+        arestas(i, i+4, matriz_perspec)
 
 pg.app.run()
