@@ -22,14 +22,14 @@ raio = 7
 # Criação dos 4 pontos no espaço 2D
 pontos = np.array(
     [
-        [-100,-100,50],
-        [-100,100,50],
-        [100,100,50],
-        [100,-100,50],
-        [-100,-100,-50],
-        [-100,100,-50],
-        [100,100,-50],
-        [100,-100,-50]
+        [-100,-100,100],
+        [-100,100,100],
+        [100,100,100],
+        [100,-100,100],
+        [-100,-100,-100],
+        [-100,100,-100],
+        [100,100,-100],
+        [100,-100,-100]
      ]
        ,dtype = "float64")
 
@@ -93,26 +93,30 @@ def on_draw():
     screen.clear()
 
     for ind in range(pontos.shape[0]):
-        
+
         # Atualizando pontos ao aplicar as 3 rotações nele
-        pontos[ind, :] = rotX @ rotY @ rotZ @ pontos[ind, :]
+        pontos[ind, :] = rotX @ rotZ @ pontos[ind, :]
+
+        # Perspectiva (Ideia geral = 1 / (distancia - z_original))
+        z = 200 / (400 - pontos[ind, :][2])
+
+        matriz_projec = np.array(
+                [
+                    [z,0,0],
+                    [0,z,0],
+                    [0,0,0]
+                ]
+            )
+
+        projec = matriz_projec @ pontos[ind, :]
 
         # Desenhando pontos na tela
-        pg.shapes.Circle(x = pontos[ind, :][0], y = pontos[ind, :][1], radius = raio, color = (230,0,255)).draw()
-        
-        arestas(0, 1, pontos)
-        arestas(1, 2, pontos)
-        arestas(2, 3, pontos)
-        arestas(3, 0, pontos)
+        pg.shapes.Circle(x = projec[0], y = projec[1], radius = raio, color = (230,0,255)).draw()
 
-        arestas(4, 5, pontos)
-        arestas(5, 6, pontos)
-        arestas(6, 7, pontos)
-        arestas(7, 4, pontos)
+    # Desenhando arestas do Cubo
+    for i in range(4):
+        arestas(i, (i+1)%4, pontos)
+        arestas(i+4, ((i+1)%4)+4, pontos)
+        arestas(i, i+4, pontos)
 
-        arestas(0, 4, pontos)
-        arestas(1, 5, pontos)
-        arestas(2, 6, pontos)
-        arestas(3, 7, pontos)
-    
 pg.app.run()
