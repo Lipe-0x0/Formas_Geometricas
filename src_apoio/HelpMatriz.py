@@ -22,8 +22,19 @@ def matmul(A, B):
     linhaB = len(B)
     colunaB = len(B[0])
 
+    array = zeroarray(linhaA, colunaB)
+
     if colunaA == linhaB:
-        print("awd")
+        for i in range(linhaA):
+            for j in range(colunaB):
+                lista1 = A[i]
+                lista2 = [linha[j] for linha in B]
+
+                valores = [x * y for x, y in zip(lista1, lista2)]
+                
+                array[i][j] = sum(valores)
+        
+        return array
 
     else:
         print("colA != rowB")
