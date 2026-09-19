@@ -8,34 +8,64 @@ def zeroarray(m, n):
 
 # Multiplicação por Escalar
 def escmult(array, escalar):
-    m = len(array)
-    n = len(array[0])
+    if isinstance(array[0], list):
+        m = len(array)
+        n = len(array[0])
     
-    return [[array[i][j]*escalar for j in range(n)] for i in range(m)]
-
+        return [[array[i][j]*escalar for j in range(n)] for i in range(m)]
+    
+    else:
+        return [i * escalar for i in range(len(array))]
 
 # Multiplicação de Matrizes
-def matmul(A, B):
-    linhaA = len(A)
-    colunaA = len(A[0])
+def matmult(A, B):
+    if isinstance(A[0], list) and isinstance(B[0], list):
 
-    linhaB = len(B)
-    colunaB = len(B[0])
+        linhaA = len(A)
+        colunaA = len(A[0])
 
-    array = zeroarray(linhaA, colunaB)
+        linhaB = len(B)
+        colunaB = len(B[0])
 
-    if colunaA == linhaB:
-        for i in range(linhaA):
-            for j in range(colunaB):
-                lista1 = A[i]
-                lista2 = [linha[j] for linha in B]
+        array = zeroarray(linhaA, colunaB)
 
-                valores = [x * y for x, y in zip(lista1, lista2)]
+        if colunaA == linhaB:
+            for i in range(linhaA):
+                for j in range(colunaB):
+                    lista1 = A[i]
+                    lista2 = [linha[j] for linha in B]
+
+                    valores = [x * y for x, y in zip(lista1, lista2)]
                 
-                array[i][j] = sum(valores)
+                    array[i][j] = sum(valores)
         
-        return array
+            return array
 
-    else:
-        print("colA != rowB")
-        return None
+        else:
+            print("colA != rowB")
+            return None
+
+# ----------------------------------------------------------
+
+    elif isinstance(B[0], int):
+        
+        linhaA = len(A)
+        colunaA = len(A[0])
+
+        linhaB = len(B)
+        colunaB = 1
+
+        array = zeroarray(linhaA, colunaB)
+
+        if colunaA == linhaB:
+            for i in range(linhaA):
+                valores = [x * y for x,y in zip(A[i], B)]
+
+                array[i] = sum(valores)
+
+            return array
+
+        else:
+            print("colA != rowB")
+            return None
+
