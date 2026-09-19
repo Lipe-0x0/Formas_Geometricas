@@ -92,6 +92,7 @@ def on_draw():
 
         # Atualizando pontos ao aplicar as 3 rotações nele
         pontos[ind] = matmult(rotX, pontos[ind])
+        pontos[ind] = matmult(rotZ, pontos[ind])
 
         # Perspectiva (Ideia geral = 1 / (distancia - z_original))
         z = 200 / (210 - pontos[ind][2])
