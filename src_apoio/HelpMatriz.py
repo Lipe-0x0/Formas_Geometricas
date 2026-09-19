@@ -8,6 +8,7 @@ def zeroarray(m, n):
 
 # Multiplicação por Escalar
 def escmult(array, escalar):
+
     if isinstance(array[0], list):
         m = len(array)
         n = len(array[0])
@@ -15,7 +16,7 @@ def escmult(array, escalar):
         return [[array[i][j]*escalar for j in range(n)] for i in range(m)]
     
     else:
-        return [i * escalar for i in range(len(array))]
+        return [i * escalar for i in array]
 
 # Multiplicação de Matrizes
 def matmult(A, B):
@@ -47,7 +48,7 @@ def matmult(A, B):
 
 # ----------------------------------------------------------
 
-    elif isinstance(B[0], int):
+    elif isinstance(B[0], int) or isinstance(B[0], float):
         
         linhaA = len(A)
         colunaA = len(A[0])
