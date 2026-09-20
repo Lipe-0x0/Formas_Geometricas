@@ -1,5 +1,5 @@
 from src_apoio.HelpMatriz import zeroarray, escmult, matmult
-import numpy as np
+import math
 import pyglet as pg
 from pyglet.math import Mat4
 
@@ -39,23 +39,23 @@ matriz_perspec = zeroarray(8,2)
 # Matrizes de rotação
 
 rotZ = [
-        [np.cos(theta), -np.sin(theta), 0],
-        [np.sin(theta), np.cos(theta), 0],
+        [math.cos(theta), -math.sin(theta), 0],
+        [math.sin(theta), math.cos(theta), 0],
         [0,0,1]
     ]
     
 
 rotY = [
-        [np.cos(theta), 0, -np.sin(theta)],
+        [math.cos(theta), 0, math.sin(theta)],
         [0,1,0],
-        [np.sin(theta), 0, np.cos(theta)]
+        [-math.sin(theta), 0, math.cos(theta)]
     ]
 
 
 rotX = [
         [1, 0, 0],
-        [0, np.cos(theta), -np.sin(theta)],
-        [0 ,np.sin(theta), np.cos(theta)]
+        [0, math.cos(theta), -math.sin(theta)],
+        [0 ,math.sin(theta), math.cos(theta)]
     ]
 
 
