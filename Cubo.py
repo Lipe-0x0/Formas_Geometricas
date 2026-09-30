@@ -38,6 +38,12 @@ matriz_perspec = zeroarray(8,2)
 
 # Matrizes de rotação
 
+rotXYZ = [
+        [math.cos(theta)**2, -math.sin(theta)*math.cos(theta), math.sin(theta)],
+        [(math.sin(theta)**2)*math.cos(theta) + math.cos(theta)*math.sin(theta), (-math.sin(theta)**3) + (math.cos(theta)**2), -math.sin(theta)*math.cos(theta)],
+        [(-math.cos(theta)**2)*math.sin(theta) + (math.sin(theta)**2), math.cos(theta)*(math.sin(theta)**2) + math.sin(theta)*math.cos(theta), math.cos(theta)**2]
+        ]
+
 rotZ = [
         [math.cos(theta), -math.sin(theta), 0],
         [math.sin(theta), math.cos(theta), 0],
@@ -91,12 +97,14 @@ def on_draw():
     for ind in range(len(pontos)):
 
         # Atualizando pontos ao aplicar as 3 rotações nele
-        pontos[ind] = matmult(rotX, pontos[ind])
-        pontos[ind] = matmult(rotZ, pontos[ind])
+        pontos[ind] = matmult(rotXYZ, pontos[ind])
 
-        # Perspectiva (Ideia geral = 1 / (distancia - z_original))
+        # Perspectiva (Ideia geral = f / (d - z_original))
+        # f = distância do view até a janela onde o objeto será projetado
+        # d = distância do view até o centro do objeto
         z = 200 / (210 - pontos[ind][2])
-
+        
+        # Atualizando x e y para criação de profundidade
         matriz_perspec[ind] = escmult(pontos[ind][0:2], z)
         
         # Desenhando pontos na tela
