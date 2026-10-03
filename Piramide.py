@@ -17,15 +17,17 @@ raio = 7
 
 # Criação dos pontos que formam a pirâmide base triangular
 pontos = [
-            [-200, -200, 100],
-            [200, -200, 100],
-            [0, -200, -100],
-            [0, 200, 0]
+            [-200.0, -200.0, 100.0],
+            [200.0, -200.0, 100.0],
+            [0.0, -200.0, -100.0],
+            [0.0, 200.0, 0.0]
         ]
 
 
-# Matrizes de Rotação
+# Matriz de Perspectiva
+matriz_perspec = zeroarray(4,2)
 
+# Matrizes de Rotação
 rotXYZ = [
             [],
             [],
@@ -67,8 +69,12 @@ def on_draw():
     screen.clear()
     
     for ind in range(len(pontos)):
+
+        # Rotacionando
+        pontos[ind] = matmult(rotX, pontos[ind])
         
         # Renderizando cada ponto
         pg.shapes.Circle(x = pontos[ind][0], y = pontos[ind][1], radius = raio, color = (255,255,255)).draw()
+
 
 pg.app.run()
