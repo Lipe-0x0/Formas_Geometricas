@@ -84,8 +84,8 @@ def on_resize(width, height):
             right = width//2,
             bottom = -height//2,
             top = height//2,
-            z_near = -255,
-            z_far = 255
+            z_near = -300,
+            z_far = 300
             )
 
 
