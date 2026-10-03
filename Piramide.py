@@ -6,6 +6,11 @@ from pyglet.math import Mat4
 
 # ----------------- Funções Complementares -------------------
 
+def arestas(i, j, matriz):
+    A = matriz[i]
+    B = matriz[j]
+
+    pg.shapes.Line(A[0], A[1], B[0], B[1], color = (255, 255, 255)).draw()
 
 # ----------------- Formas --------------------
 
@@ -37,9 +42,20 @@ rotXYZ = [
 rotX = [
             [1, 0, 0],
             [0, math.cos(theta), -math.sin(theta)],
-            [0, math.cos(theta), math.sin(theta)]
+            [0, math.sin(theta), math.cos(theta)]
         ]
 
+rotY = [
+            [math.cos(theta), 0, math.sin(theta)],
+            [0, 1, 0],
+            [-math.sin(theta), 0, math.cos(theta)]
+        ]
+
+rotZ = [
+            [math.cos(theta), -math.sin(theta), 0],
+            [math.sin(theta), math.cos(theta), 0],
+            [0, 0, 1]
+        ]
 
 # --------------------- Criação da Superfície -------------------
 
@@ -72,9 +88,22 @@ def on_draw():
 
         # Rotacionando
         pontos[ind] = matmult(rotX, pontos[ind])
-        
+        pontos[ind] = matmult(rotY, pontos[ind])
+        pontos[ind] = matmult(rotZ, pontos[ind])
+
+        # Projeção em perspectiva
+        z = 300 / (350 - pontos[ind][2])
+
+        matriz_perspec[ind] = escmult(pontos[ind][0:2], z)
+
         # Renderizando cada ponto
-        pg.shapes.Circle(x = pontos[ind][0], y = pontos[ind][1], radius = raio, color = (255,255,255)).draw()
+        pg.shapes.Circle(x = matriz_perspec[ind][0], y = matriz_perspec[ind][1], radius = raio, color = (230,0,255)).draw()
+
+    # Conectando vértices
+    for i in range(3):
+        arestas(i, (i+1)%3, matriz_perspec)
+        arestas(i, 3, matriz_perspec)
+
 
 
 pg.app.run()
