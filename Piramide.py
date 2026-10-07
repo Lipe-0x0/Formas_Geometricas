@@ -14,11 +14,10 @@ def arestas(i, j, matriz):
 
 # ----------------- Formas --------------------
 
-# Ângulo de rotação
-theta = 0.02
-A = 0.01
-B = 0.02
-C = 0.03
+# Ângulos de rotação, um ângulo para eixo afim de evitar a fixação de pontos em torno do eixo de rotação final
+A = 0.011
+B = 0.015
+C = 0.02
 
 
 # Raio dos pontos
@@ -97,7 +96,8 @@ def on_draw():
 
         # Projeção em perspectiva
         z = 300 / (350 - pontos[ind][2])
-
+        
+        # Atualização de x e y a partir de "z" para projeção de profundidade
         matriz_perspec[ind] = escmult(pontos[ind][0:2], z)
 
         # Renderizando cada ponto

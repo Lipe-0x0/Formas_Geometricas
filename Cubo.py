@@ -14,11 +14,10 @@ def arestas(i, j, Matriz):
 
 # ------------------ Formas ---------------------
 
-# Ângulo de rotação
-theta = 0.02
-A = 0.01
-B = 0.02
-C = 0.03
+# Ângulos de rotação, cada rotação possuíra um ângulo para evitar que certos pontos fiquem fixos em torno do eixo de rotação
+thetax = 0.015
+thetay = 0.017
+thetaz = 0.011
 
 # Raio dos pontos
 raio = 7
@@ -41,30 +40,30 @@ matriz_perspec = zeroarray(8,2)
 
 # Matrizes de rotação
 
-rotXYZ = [
-        [math.cos(theta)**2, -math.sin(theta)*math.cos(theta), math.sin(theta)],
-        [(math.sin(theta)**2)*math.cos(theta) + math.cos(theta)*math.sin(theta), (-math.sin(theta)**3) + (math.cos(theta)**2), -math.sin(theta)*math.cos(theta)],
-        [(-math.cos(theta)**2)*math.sin(theta) + (math.sin(theta)**2), math.cos(theta)*(math.sin(theta)**2) + math.sin(theta)*math.cos(theta), math.cos(theta)**2]
-        ]
+#rotXYZ = [
+#        [math.cos(theta)**2, -math.sin(theta)*math.cos(theta), math.sin(theta)],
+#        [(math.sin(theta)**2)*math.cos(theta) + math.cos(theta)*math.sin(theta), (-math.sin(theta)**3) + (math.cos(theta)**2), -math.sin(theta)*math.cos(theta)],
+#        [(-math.cos(theta)**2)*math.sin(theta) + (math.sin(theta)**2), math.cos(theta)*(math.sin(theta)**2) + math.sin(theta)*math.cos(theta), math.cos(theta)**2]
+#        ]
 
 rotZ = [
-        [math.cos(C), -math.sin(C), 0],
-        [math.sin(C), math.cos(C), 0],
+        [math.cos(thetaz), -math.sin(thetaz), 0],
+        [math.sin(thetaz), math.cos(thetaz), 0],
         [0,0,1]
     ]
     
 
 rotY = [
-        [math.cos(B), 0, math.sin(B)],
+        [math.cos(thetay), 0, math.sin(thetay)],
         [0,1,0],
-        [-math.sin(B), 0, math.cos(B)]
+        [-math.sin(thetay), 0, math.cos(thetay)]
     ]
 
 
 rotX = [
         [1, 0, 0],
-        [0, math.cos(A), -math.sin(A)],
-        [0 ,math.sin(A), math.cos(A)]
+        [0, math.cos(thetax), -math.sin(thetax)],
+        [0 ,math.sin(thetax), math.cos(thetax)]
     ]
 
 
@@ -110,7 +109,7 @@ def on_draw():
         # z_original = distância do ponto até o centro do objeto
         z = 200 / (210 - pontos[ind][2])
         
-        # Atualizando x e y para criação de profundidade
+        # Atualizando x e y por meio de "z" para percepção de profundidade
         matriz_perspec[ind] = escmult(pontos[ind][0:2], z)
         
         # Desenhando pontos na tela
