@@ -16,6 +16,10 @@ def arestas(i, j, matriz):
 
 # Ângulo de rotação
 theta = 0.02
+A = 0.01
+B = 0.02
+C = 0.03
+
 
 # Raio dos pontos
 raio = 7
@@ -41,19 +45,19 @@ rotXYZ = [
 
 rotX = [
             [1, 0, 0],
-            [0, math.cos(theta), -math.sin(theta)],
-            [0, math.sin(theta), math.cos(theta)]
+            [0, math.cos(A), -math.sin(A)],
+            [0, math.sin(A), math.cos(A)]
         ]
 
 rotY = [
-            [math.cos(theta), 0, math.sin(theta)],
+            [math.cos(B), 0, math.sin(B)],
             [0, 1, 0],
-            [-math.sin(theta), 0, math.cos(theta)]
+            [-math.sin(B), 0, math.cos(B)]
         ]
 
 rotZ = [
-            [math.cos(theta), -math.sin(theta), 0],
-            [math.sin(theta), math.cos(theta), 0],
+            [math.cos(C), -math.sin(C), 0],
+            [math.sin(C), math.cos(C), 0],
             [0, 0, 1]
         ]
 
