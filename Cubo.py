@@ -16,6 +16,9 @@ def arestas(i, j, Matriz):
 
 # Ângulo de rotação
 theta = 0.02
+A = 0.01
+B = 0.02
+C = 0.03
 
 # Raio dos pontos
 raio = 7
@@ -45,23 +48,23 @@ rotXYZ = [
         ]
 
 rotZ = [
-        [math.cos(theta), -math.sin(theta), 0],
-        [math.sin(theta), math.cos(theta), 0],
+        [math.cos(C), -math.sin(C), 0],
+        [math.sin(C), math.cos(C), 0],
         [0,0,1]
     ]
     
 
 rotY = [
-        [math.cos(theta), 0, math.sin(theta)],
+        [math.cos(B), 0, math.sin(B)],
         [0,1,0],
-        [-math.sin(theta), 0, math.cos(theta)]
+        [-math.sin(B), 0, math.cos(B)]
     ]
 
 
 rotX = [
         [1, 0, 0],
-        [0, math.cos(theta), -math.sin(theta)],
-        [0 ,math.sin(theta), math.cos(theta)]
+        [0, math.cos(A), -math.sin(A)],
+        [0 ,math.sin(A), math.cos(A)]
     ]
 
 
@@ -97,11 +100,14 @@ def on_draw():
     for ind in range(len(pontos)):
 
         # Atualizando pontos ao aplicar as 3 rotações nele
-        pontos[ind] = matmult(rotXYZ, pontos[ind])
+        pontos[ind] = matmult(rotX, pontos[ind])
+        pontos[ind] = matmult(rotY, pontos[ind])
+        pontos[ind] = matmult(rotZ, pontos[ind])
 
         # Perspectiva (Ideia geral = f / (d - z_original))
         # f = distância do view até a janela onde o objeto será projetado
         # d = distância do view até o centro do objeto
+        # z_original = distância do ponto até o centro do objeto
         z = 200 / (210 - pontos[ind][2])
         
         # Atualizando x e y para criação de profundidade
