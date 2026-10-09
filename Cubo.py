@@ -69,10 +69,6 @@ rotX = [
 
 # ------------------- Canva ---------------------
 
-# Altura e Largura da Tela
-alt = 750
-lar = 750
-
 # Superfície
 screen = pg.window.Window(fullscreen = True)
 
@@ -86,8 +82,8 @@ def on_resize(width, height):
             right = width//2,
             bottom = -height//2,
             top = height//2,
-            z_near = -300,
-            z_far = 300
+            z_near = -350,
+            z_far = 350
             )
 
 
