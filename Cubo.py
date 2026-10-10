@@ -82,8 +82,8 @@ def on_resize(width, height):
             right = width//2,
             bottom = -height//2,
             top = height//2,
-            z_near = -350,
-            z_far = 350
+            z_near = -255,
+            z_far = 255
             )
 
 
@@ -100,10 +100,13 @@ def on_draw():
         pontos[ind] = matmult(rotZ, pontos[ind])
 
         # Perspectiva (Ideia geral = f / (d - z_original))
-        # f = distância do view até a janela onde o objeto será projetado
+        # f = distância do objeto até a janela onde ele será projetado
         # d = distância do view até o centro do objeto
         # z_original = distância do ponto até o centro do objeto
-        z = 200 / (210 - pontos[ind][2])
+
+        # Critério de escolha: d > R, onde R é o maior môdulo dos vetores(vértices)  
+
+        z = 200 / (200 - pontos[ind][2])
         
         # Atualizando x e y por meio de "z" para percepção de profundidade
         matriz_perspec[ind] = escmult(pontos[ind][0:2], z)

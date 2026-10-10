@@ -15,9 +15,9 @@ def arestas(i, j, matriz):
 # ----------------- Formas --------------------
 
 # Ângulos de rotação, um ângulo para eixo afim de evitar a fixação de pontos em torno do eixo de rotação final
-A = 0.011
-B = 0.015
-C = 0.02
+thetax = 0.011
+thetay = 0.015
+thetaz = 0.02
 
 
 # Raio dos pontos
@@ -25,10 +25,10 @@ raio = 7
 
 # Criação dos pontos que formam a pirâmide base triangular
 pontos = [
-            [-200.0, -200.0, 100.0],
-            [200.0, -200.0, 100.0],
-            [0.0, -200.0, -100.0],
-            [0.0, 200.0, 0.0]
+            [-200.0, -100.0, 75.0],
+            [200.0, -100.0, 75.0],
+            [0.0, -100.0, -125.0],
+            [0.0, 300.0, -25.0]
         ]
 
 
@@ -44,27 +44,23 @@ rotXYZ = [
 
 rotX = [
             [1, 0, 0],
-            [0, math.cos(A), -math.sin(A)],
-            [0, math.sin(A), math.cos(A)]
+            [0, math.cos(thetax), -math.sin(thetax)],
+            [0, math.sin(thetax), math.cos(thetax)]
         ]
 
 rotY = [
-            [math.cos(B), 0, math.sin(B)],
+            [math.cos(thetay), 0, math.sin(thetay)],
             [0, 1, 0],
-            [-math.sin(B), 0, math.cos(B)]
+            [-math.sin(thetay), 0, math.cos(thetay)]
         ]
 
 rotZ = [
-            [math.cos(C), -math.sin(C), 0],
-            [math.sin(C), math.cos(C), 0],
+            [math.cos(thetaz), -math.sin(thetaz), 0],
+            [math.sin(thetaz), math.cos(thetaz), 0],
             [0, 0, 1]
         ]
 
 # --------------------- Criação da Superfície -------------------
-
-# Tamanho da tela (Largura x Altura)
-lar = 720
-alt = 720
 
 # Superfície
 screen = pg.window.Window(fullscreen = True)
@@ -78,8 +74,8 @@ def on_resize(width, height):
             right = width/2,
             bottom = -height/2,
             top = height/2,
-            z_near = -300,
-            z_far = 300
+            z_near = -255,
+            z_far = 255
             )
 
 # Projetando e Renderizando na superfície
@@ -95,7 +91,7 @@ def on_draw():
         pontos[ind] = matmult(rotZ, pontos[ind])
 
         # Projeção em perspectiva
-        z = 300 / (350 - pontos[ind][2])
+        z = 900 / (900 - pontos[ind][2])
         
         # Atualização de x e y a partir de "z" para projeção de profundidade
         matriz_perspec[ind] = escmult(pontos[ind][0:2], z)
