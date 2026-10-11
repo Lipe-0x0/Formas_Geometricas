@@ -40,11 +40,11 @@ matriz_perspec = zeroarray(8,2)
 
 # Matrizes de rotação
 
-#rotXYZ = [
-#        [math.cos(theta)**2, -math.sin(theta)*math.cos(theta), math.sin(theta)],
-#        [(math.sin(theta)**2)*math.cos(theta) + math.cos(theta)*math.sin(theta), (-math.sin(theta)**3) + (math.cos(theta)**2), -math.sin(theta)*math.cos(theta)],
-#        [(-math.cos(theta)**2)*math.sin(theta) + (math.sin(theta)**2), math.cos(theta)*(math.sin(theta)**2) + math.sin(theta)*math.cos(theta), math.cos(theta)**2]
-#        ]
+rotXYZ = [
+            [math.cos(thetay)*math.cos(thetaz), -math.cos(thetay)*math.sin(thetaz), math.sin(thetay)],
+            [math.sin(thetax)*math.sin(thetay)*math.cos(thetaz) + math.cos(thetax)*math.sin(thetaz), -math.sin(thetax)*math.sin(thetay)*math.sin(thetaz) + math.cos(thetax)*math.cos(thetaz), -math.sin(thetax)*math.cos(thetay)],
+            [-math.cos(thetax)*math.sin(thetay)*math.cos(thetaz) + math.sin(thetax)*math.sin(thetaz), math.cos(thetax)*math.sin(thetay)*math.sin(thetaz) + math.sin(thetax)*math.cos(thetaz), math.cos(thetax)*math.cos(thetay)]
+        ]
 
 rotZ = [
         [math.cos(thetaz), -math.sin(thetaz), 0],
@@ -95,9 +95,7 @@ def on_draw():
     for ind in range(len(pontos)):
 
         # Atualizando pontos ao aplicar as 3 rotações nele
-        pontos[ind] = matmult(rotX, pontos[ind])
-        pontos[ind] = matmult(rotY, pontos[ind])
-        pontos[ind] = matmult(rotZ, pontos[ind])
+        pontos[ind] = matmult(rotXYZ, pontos[ind])
 
         # Perspectiva (Ideia geral = f / (d - z_original))
         # f = distância do objeto até a janela onde ele será projetado

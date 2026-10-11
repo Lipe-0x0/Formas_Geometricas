@@ -37,9 +37,9 @@ matriz_perspec = zeroarray(4,2)
 
 # Matrizes de Rotação
 rotXYZ = [
-            [],
-            [],
-            []
+            [math.cos(thetay)*math.cos(thetaz), -math.cos(thetay)*math.sin(thetaz), math.sin(thetay)],
+            [math.sin(thetax)*math.sin(thetay)*math.cos(thetaz) + math.cos(thetax)*math.sin(thetaz), -math.sin(thetax)*math.sin(thetay)*math.sin(thetaz) + math.cos(thetax)*math.cos(thetaz), -math.sin(thetax)*math.cos(thetay)],
+            [-math.cos(thetax)*math.sin(thetay)*math.cos(thetaz) + math.sin(thetax)*math.sin(thetaz), math.cos(thetax)*math.sin(thetay)*math.sin(thetaz) + math.sin(thetax)*math.cos(thetaz), math.cos(thetax)*math.cos(thetay)]
         ] 
 
 rotX = [
@@ -86,9 +86,7 @@ def on_draw():
     for ind in range(len(pontos)):
 
         # Rotacionando
-        pontos[ind] = matmult(rotX, pontos[ind])
-        pontos[ind] = matmult(rotY, pontos[ind])
-        pontos[ind] = matmult(rotZ, pontos[ind])
+        pontos[ind] = matmult(rotXYZ, pontos[ind])
 
         # Projeção em perspectiva
         z = 900 / (900 - pontos[ind][2])
