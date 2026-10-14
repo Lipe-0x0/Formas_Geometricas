@@ -10,7 +10,7 @@ def arestas(i, j, matriz):
     A = matriz[i]
     B = matriz[j]
 
-    pg.shapes.Line(A[0], A[1], B[0], B[1], color = (255, 255, 255)).draw()
+    pg.shapes.Line(A[0] + 1920/2, A[1] + 1080/2, B[0] + 1920/2, B[1] + 1080/2, color = (255, 255, 255)).draw()
 
 # ----------------- Formas --------------------
 
@@ -65,18 +65,6 @@ rotZ = [
 # Superfície
 screen = pg.window.Window(fullscreen = True)
 
-# Redimensionando janela para que o centro seja (0,0)
-@screen.event
-def on_resize(width, height):
-    # Projeção Ortográfica 2D
-    screen.projection = Mat4.orthogonal_projection(
-            left = -width/2,
-            right = width/2,
-            bottom = -height/2,
-            top = height/2,
-            z_near = -255,
-            z_far = 255
-            )
 
 # Projetando e Renderizando na superfície
 @screen.event
@@ -95,7 +83,7 @@ def on_draw():
         matriz_perspec[ind] = escmult(pontos[ind][0:2], z)
 
         # Renderizando cada ponto
-        pg.shapes.Circle(x = matriz_perspec[ind][0], y = matriz_perspec[ind][1], radius = raio, color = (230,0,255)).draw()
+        pg.shapes.Circle(x = matriz_perspec[ind][0] + 1920/2, y = matriz_perspec[ind][1] + 1080/2, radius = raio, color = (230,0,255)).draw()
 
     # Conectando vértices
     for i in range(3):
