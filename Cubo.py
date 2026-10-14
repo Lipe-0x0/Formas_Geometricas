@@ -10,7 +10,7 @@ def arestas(i, j, Matriz):
     a = Matriz[i]
     b = Matriz[j]
 
-    pg.shapes.Line(x = a[0], y = a[1], x2 = b[0], y2 = b[1], color = (255,255,255)).draw()
+    pg.shapes.Line(x = a[0] + 1920/2, y = a[1] + 1080/2, x2 = b[0] + 1920/2, y2 = b[1] + 1080/2, color = (255,255,255)).draw()
 
 # ------------------ Formas ---------------------
 
@@ -72,28 +72,6 @@ rotX = [
 # Superfície
 screen = pg.window.Window(fullscreen = True)
 
-width = 1
-height = 1
-
-
-# Redimensionando superfície para que centro seja (0,0)
-#@screen.event
-#def on_resize(width, height):
-#    # Projeção ortográfica 2D
-#    screen.projection = Mat4.orthogonal_projection(
-#            left = -width//2,
-#            right = width//2,
-#            bottom = -height//2,
-#            top = height//2,
-#            z_near = -255,
-#            z_far = 255
-#            )
-
-for ind in range(len(pontos)):
-        # Trazendo cada vértice para o intervalo do canvas -> 0...width/height
-        # Sendo x -> -100...100 e y -> -100...100
-        pontos[ind][0] = ((pontos[ind][0] + 100)/2 * width) + 1920/2
-        pontos[ind][1] = ((pontos[ind][1] + 100)/2 * height) + 1080/2
 
 @screen.event
 def on_draw():
@@ -111,18 +89,18 @@ def on_draw():
 
         # Critério de escolha: d > R, onde R é o maior môdulo dos vetores(vértices)  
 
-        #z = 200 / (200 - pontos[ind][2])
+        z = 200 / (200 - pontos[ind][2])
         
         # Atualizando x e y por meio de "z" para percepção de profundidade
-        #matriz_perspec[ind] = escmult(pontos[ind][0:2], z)
+        matriz_perspec[ind] = escmult(pontos[ind][0:2], z)
         
         # Desenhando pontos na tela
-        pg.shapes.Circle(x = pontos[ind][0], y = pontos[ind][1], radius = raio, color = (230,0,255)).draw()
+        pg.shapes.Circle(x = matriz_perspec[ind][0] + 1920/2, y = matriz_perspec[ind][1] + 1080/2, radius = raio, color = (230,0,255)).draw()
 
     # Desenhando arestas do Cubo
-    #for i in range(4):
-    #    arestas(i, (i+1)%4, matriz_perspec)
-    #    arestas(i+4, ((i+1)%4)+4, matriz_perspec)
-    #    arestas(i, i+4, matriz_perspec)
+    for i in range(4):
+        arestas(i, (i+1)%4, matriz_perspec)
+        arestas(i+4, ((i+1)%4)+4, matriz_perspec)
+        arestas(i, i+4, matriz_perspec)
 
 pg.app.run()
