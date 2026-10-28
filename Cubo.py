@@ -1,5 +1,4 @@
-from src_apoio.HelpMatriz import zeroarray, escmult, matmult
-import math
+from src_apoio.HelpMatriz import zeroarray, escmult, matmult, cose, seno
 import pyglet as pg
 from pyglet.math import Mat4
 
@@ -41,9 +40,9 @@ matriz_perspec = zeroarray(8,2)
 # Matrizes de rotação
 
 rotXYZ = [
-            [math.cos(thetay)*math.cos(thetaz), -math.cos(thetay)*math.sin(thetaz), math.sin(thetay)],
-            [math.sin(thetax)*math.sin(thetay)*math.cos(thetaz) + math.cos(thetax)*math.sin(thetaz), -math.sin(thetax)*math.sin(thetay)*math.sin(thetaz) + math.cos(thetax)*math.cos(thetaz), -math.sin(thetax)*math.cos(thetay)],
-            [-math.cos(thetax)*math.sin(thetay)*math.cos(thetaz) + math.sin(thetax)*math.sin(thetaz), math.cos(thetax)*math.sin(thetay)*math.sin(thetaz) + math.sin(thetax)*math.cos(thetaz), math.cos(thetax)*math.cos(thetay)]
+            [cose(thetay)*cose(thetaz), -cose(thetay)*seno(thetaz), seno(thetay)],
+            [seno(thetax)*seno(thetay)*cose(thetaz) + cose(thetax)*seno(thetaz), -seno(thetax)*seno(thetay)*seno(thetaz) + cose(thetax)*cose(thetaz), -seno(thetax)*cose(thetay)],
+            [-cose(thetax)*seno(thetay)*cose(thetaz) + seno(thetax)*seno(thetaz), cose(thetax)*seno(thetay)*seno(thetaz) + seno(thetax)*cose(thetaz), cose(thetax)*cose(thetay)]
         ]
 
 rotZ = [
