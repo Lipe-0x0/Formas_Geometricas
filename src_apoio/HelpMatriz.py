@@ -83,13 +83,13 @@ def matmult(A, B):
 def cose(theta, n):
     radi_cos = 0
     for par in range(n):
-        radi_cos += (((-1)**n / fatorial(2*n + 1)) * theta**(2*n + 1)) 
+        radi_cos += (((-1)**par / fatorial(2*par + 1)) * theta**(2*par + 1)) 
 
     return radi_cos
 
 def seno(theta):
     radi_sen = 0
     for impar in range(n):
-        radi_sen += (((-1)**n / fatorial(2*n)) * theta**(2*n)) 
+        radi_sen += (((-1)**impar / fatorial(2*impar)) * theta**(2*impar)) 
     
     return radi_sen
