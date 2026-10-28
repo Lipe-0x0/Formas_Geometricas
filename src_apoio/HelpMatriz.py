@@ -1,5 +1,12 @@
 # Conjunto de funções que auxiliem no cálculo de matrizes e vetores
 
+# ----------- Função suporte ------------
+def fatorial(number):
+    if number == 0 or number == 1:
+        return 1
+    else:
+        return number*fatorial(number-1)
+# ---------------------------------------
 
 # Array MxN zerado
 def zeroarray(m, n):
@@ -46,7 +53,7 @@ def matmult(A, B):
             print("colA != rowB")
             return None
 
-# ----------------------------------------------------------
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     elif isinstance(B[0], int) or isinstance(B[0], float):
         
@@ -70,3 +77,19 @@ def matmult(A, B):
             print("colA != rowB")
             return None
 
+
+# Cálculo do cos/sen a partir da série de Taylor/Maclaurin(a = 0)
+
+def cose(theta, n):
+    radi_cos = 0
+    for par in range(n):
+        radi_cos += (((-1)**n / fatorial(2*n + 1)) * theta**(2*n + 1)) 
+
+    return radi_cos
+
+def seno(theta):
+    radi_sen = 0
+    for impar in range(n):
+        radi_sen += (((-1)**n / fatorial(2*n)) * theta**(2*n)) 
+    
+    return radi_sen
