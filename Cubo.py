@@ -40,29 +40,29 @@ matriz_perspec = zeroarray(8,2)
 # Matrizes de rotação
 
 rotXYZ = [
-            [cose(thetay)*cose(thetaz), -cose(thetay)*seno(thetaz), seno(thetay)],
-            [seno(thetax)*seno(thetay)*cose(thetaz) + cose(thetax)*seno(thetaz), -seno(thetax)*seno(thetay)*seno(thetaz) + cose(thetax)*cose(thetaz), -seno(thetax)*cose(thetay)],
-            [-cose(thetax)*seno(thetay)*cose(thetaz) + seno(thetax)*seno(thetaz), cose(thetax)*seno(thetay)*seno(thetaz) + seno(thetax)*cose(thetaz), cose(thetax)*cose(thetay)]
+            [cose(thetay, 100)*cose(thetaz, 100), -cose(thetay, 100)*seno(thetaz, 100), seno(thetay, 100)],
+            [seno(thetax, 100)*seno(thetay, 100)*cose(thetaz, 100) + cose(thetax, 100)*seno(thetaz, 100), -seno(thetax, 100)*seno(thetay, 100)*seno(thetaz, 100) + cose(thetax, 100)*cose(thetaz, 100), -seno(thetax, 100)*cose(thetay, 100)],
+            [-cose(thetax, 100)*seno(thetay, 100)*cose(thetaz, 100) + seno(thetax, 100)*seno(thetaz, 100), cose(thetax, 100)*seno(thetay, 100)*seno(thetaz, 100) + seno(thetax, 100)*cose(thetaz, 100), cose(thetax, 100)*cose(thetay, 100)]
         ]
 
 rotZ = [
-        [math.cos(thetaz), -math.sin(thetaz), 0],
-        [math.sin(thetaz), math.cos(thetaz), 0],
+        [cose(thetaz, 100), -seno(thetaz, 100), 0],
+        [seno(thetaz, 100), cose(thetaz, 100), 0],
         [0,0,1]
     ]
     
 
 rotY = [
-        [math.cos(thetay), 0, math.sin(thetay)],
+        [cose(thetay, 100), 0, seno(thetay, 100)],
         [0,1,0],
-        [-math.sin(thetay), 0, math.cos(thetay)]
+        [-seno(thetay, 100), 0, cose(thetay, 100)]
     ]
 
 
 rotX = [
         [1, 0, 0],
-        [0, math.cos(thetax), -math.sin(thetax)],
-        [0 ,math.sin(thetax), math.cos(thetax)]
+        [0, cose(thetax, 100), -seno(thetax, 100)],
+        [0 ,seno(thetax, 100), cose(thetax, 100)]
     ]
 
 
