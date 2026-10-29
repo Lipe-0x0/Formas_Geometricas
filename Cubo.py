@@ -1,6 +1,5 @@
 from src_apoio.HelpMatriz import zeroarray, escmult, matmult, cose, seno
 import pyglet as pg
-from pyglet.math import Mat4
 
 
 # ----------------- Funções Complementares -----------------
