@@ -80,16 +80,16 @@ def matmult(A, B):
 
 # Cálculo do cos/sen a partir da série de Taylor/Maclaurin(a = 0)
 
-def cose(theta, n):
-    radi_cos = 0
-    for par in range(n):
-        radi_cos += (((-1)**par / fatorial(2*par + 1)) * theta**(2*par + 1)) 
+def seno(theta, n):
+    radi_sen = 0
+    for impar in range(n):
+        radi_sen += (((-1)**impar / fatorial(2*impar + 1)) * theta**(2*impar + 1)) 
 
     return radi_cos
 
-def seno(theta):
-    radi_sen = 0
-    for impar in range(n):
-        radi_sen += (((-1)**impar / fatorial(2*impar)) * theta**(2*impar)) 
+def cose(theta, n):
+    radi_cos = 0
+    for par in range(n):
+        radi_cos += (((-1)**par / fatorial(2*par)) * theta**(2*par)) 
     
-    return radi_sen
+    return radi_cos
