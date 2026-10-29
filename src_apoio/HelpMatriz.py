@@ -85,7 +85,7 @@ def seno(theta, n):
     for impar in range(n):
         radi_sen += (((-1)**impar / fatorial(2*impar + 1)) * theta**(2*impar + 1)) 
 
-    return radi_cos
+    return radi_sen
 
 def cose(theta, n):
     radi_cos = 0
