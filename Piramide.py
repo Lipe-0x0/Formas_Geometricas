@@ -1,7 +1,6 @@
-from src_apoio.HelpMatriz import zeroarray, escmult, matmult
-import math
+from src_apoio.HelpMatriz import zeroarray, escmult, matmult, seno, cose
 import pyglet as pg
-from pyglet.math import Mat4
+
 
 
 # ----------------- Funções Complementares -------------------
@@ -37,26 +36,26 @@ matriz_perspec = zeroarray(4,2)
 
 # Matrizes de Rotação
 rotXYZ = [
-            [math.cos(thetay)*math.cos(thetaz), -math.cos(thetay)*math.sin(thetaz), math.sin(thetay)],
-            [math.sin(thetax)*math.sin(thetay)*math.cos(thetaz) + math.cos(thetax)*math.sin(thetaz), -math.sin(thetax)*math.sin(thetay)*math.sin(thetaz) + math.cos(thetax)*math.cos(thetaz), -math.sin(thetax)*math.cos(thetay)],
-            [-math.cos(thetax)*math.sin(thetay)*math.cos(thetaz) + math.sin(thetax)*math.sin(thetaz), math.cos(thetax)*math.sin(thetay)*math.sin(thetaz) + math.sin(thetax)*math.cos(thetaz), math.cos(thetax)*math.cos(thetay)]
+            [cose(thetay, 100)*cose(thetaz, 100), -cose(thetay, 100)*seno(thetaz, 100), seno(thetay, 100)],
+            [seno(thetax, 100)*seno(thetay, 100)*cose(thetaz, 100) + cose(thetax, 100)*seno(thetaz, 100), -seno(thetax, 100)*seno(thetay, 100)*seno(thetaz, 100) + cose(thetax, 100)*cose(thetaz, 100), -seno(thetax, 100)*cose(thetay, 100)],
+            [-cose(thetax, 100)*seno(thetay, 100)*cose(thetaz, 100) + seno(thetax, 100)*seno(thetaz, 100), cose(thetax, 100)*seno(thetay, 100)*seno(thetaz, 100) + seno(thetax, 100)*cose(thetaz, 100), cose(thetax, 100)*cose(thetay, 100)]
         ] 
 
 rotX = [
             [1, 0, 0],
-            [0, math.cos(thetax), -math.sin(thetax)],
-            [0, math.sin(thetax), math.cos(thetax)]
+            [0, cose(thetax, 100), -seno(thetax, 100)],
+            [0, seno(thetax, 100), cose(thetax, 100)]
         ]
 
 rotY = [
-            [math.cos(thetay), 0, math.sin(thetay)],
+            [cose(thetay, 100), 0, seno(thetay, 100)],
             [0, 1, 0],
-            [-math.sin(thetay), 0, math.cos(thetay)]
+            [-seno(thetay, 100), 0, cose(thetay, 100)]
         ]
 
 rotZ = [
-            [math.cos(thetaz), -math.sin(thetaz), 0],
-            [math.sin(thetaz), math.cos(thetaz), 0],
+            [cose(thetaz, 100), -seno(thetaz, 100), 0],
+            [seno(thetaz, 100), cose(thetaz, 100), 0],
             [0, 0, 1]
         ]
 
