@@ -22,14 +22,22 @@ raio = 7
 
 # Criação dos 4 pontos no espaço 2D
 pontos = [
-        [-100.0, 0, 100.0],
+        [-50.0, 0, -150.0],
         [-100.0, 0, -100.0],
+        [-150.0, 0, -50.0],
+        [-150.0, 0, 50.0],
+        [-100.0, 0, 100.0],
+        [-50.0, 0, 150.0],
+        [50.0, 0, -150.0],
+        [100.0, 0, -100.0],
+        [150.0, 0, -50.0],
+        [150.0, 0, 50.0],
         [100.0, 0, 100.0],
-        [100.0, 0, -100.0]
+        [50.0, 0, 150.0]
         ]
 
 # Matriz de Perspectiva
-matriz_perspec = zeroarray(4,2)
+matriz_perspec = zeroarray(12,2)
 
 
 # Matrizes de rotação
@@ -81,10 +89,9 @@ def on_draw():
         pg.shapes.Circle(x = matriz_perspec[ind][0] + 1920/2, y = matriz_perspec[ind][1] + 1080/2, 
                          color = (230, 0, 255), radius = raio).draw()
 
-    for i in range(2):
-        print(i)
-        arestas(i, (i+1)%2, matriz_perspec)
-        arestas(i+2, ((i+1)%2)+2, matriz_perspec)
-        arestas(i, i+2, matriz_perspec)
+    for i in range(len(matriz_perspec)):
+        if i != (len(matriz_perspec)-1):
+            arestas(i, i+1, matriz_perspec)
+        arestas(0, len(matriz_perspec)-1, matriz_perspec)
 
 pg.app.run()
