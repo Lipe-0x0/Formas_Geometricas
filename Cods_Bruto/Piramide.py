@@ -1,3 +1,8 @@
+import sys
+
+# Pega o caminho do diretório atual
+sys.path.insert(0, "/home/fan/Documentos/Python/PROJETOS PYTHON/Formas Geométricas")
+
 from src_apoio.HelpMatriz import zeroarray, escmult, matmult, seno, cose
 import pyglet as pg
 
