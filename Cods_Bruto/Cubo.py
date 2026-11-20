@@ -26,7 +26,7 @@ thetaz = 0.011
 # Raio dos pontos
 raio = 7
 
-# Criação dos 4 pontos no espaço 2D
+# Criação dos 8 pontos no espaço 2D
 pontos = [
         [-100.0, -100.0, 100.0],
         [-100.0, 100.0, 100.0],
@@ -93,7 +93,7 @@ def on_draw():
 
         # Critério de escolha: d > R, onde R é o maior môdulo dos vetores(vértices)  
 
-        z = 200 / (200 - pontos[ind][2])
+        z = 300 / (300 - pontos[ind][2])
         
         # Atualizando x e y por meio de "z" para percepção de profundidade
         matriz_perspec[ind] = escmult(pontos[ind][0:2], z)
