@@ -117,8 +117,8 @@ def on_draw():
         pg.shapes.Circle(x = pontosY[ind][0] + 1920/2, y = pontosY[ind][1] + 1080/2, 
                          color = (230, 0, 255), radius = raio).draw()
 
-        pg.shapes.Line(x = 0, y = 1080/2, x2 = 1920, y2 = 1080/2, color = (255,255,255)).draw() # Linha Horizontal
-        pg.shapes.Line(x = 1920/2, y = 0, x2 = 1920/2, y2 = 1080, color = (255,255,255)).draw() # Linha Vertical
+        #pg.shapes.Line(x = 0, y = 1080/2, x2 = 1920, y2 = 1080/2, color = (255,255,255)).draw() # Linha Horizontal
+        #pg.shapes.Line(x = 1920/2, y = 0, x2 = 1920/2, y2 = 1080, color = (255,255,255)).draw() # Linha Vertical
 
     for i in range(len(pontosX)):
         if i != (len(pontosX)-1):
