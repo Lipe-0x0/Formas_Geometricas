@@ -19,6 +19,9 @@ def arestas(i, j, matriz):
 
 # ------------------ Formas -------------------
 
+# Raio das bolas
+raio = 7
+
 # Ângulos para cada eixo de rotação(X, Y, Z)
 thetax = 0.011
 thetay = 0.015
@@ -67,9 +70,9 @@ rotX = [
 
 # Matriz de Projeção Perspectiva
 # Onde n = near(próximo) e f = far(distante), d = distância do olho até o objeto
-n = 300
+n = 900
 # f = 300, como a terceira linha da multiplicação não é utilizada(até pq não estou fazendo um buffer) então achei melhor zerar
-d = 250 # Critério de escolha: d > R, onde R é o maior môdulo dos vetores(vértices)
+d = 900 # Critério de escolha: d > R, onde R é o maior môdulo dos vetores(vértices)
 
 PP = [
         [n, 0, 0, 0],
@@ -92,20 +95,21 @@ def on_draw():
     for ind in range(len(pontos)):
         
         # Rotacionando pontos
-        pontos[ind] = matmult(pontos[ind], rotXYZ)
+        pontos[ind] = matmult(rotXYZ, pontos[ind])
+        
+        #
+        matriz_perspec[ind] = matmult(PP, pontos[ind])
+            
+        #
+        matriz_perspec[ind] = escmult(matriz_perspec[ind], 1/(d-matriz_perspec[ind][3]))
 
-        # 
-        matriz_perspec = matmult(pontos[ind], PP)
 
-        matriz_perspec = escmult(matriz_perspec[ind], 1/(d-matriz_perspec[3]))
-
-
-        pg.shapes.Circle(x = 1920/2, y = 1080/2, radius = raio,
+        pg.shapes.Circle(x = matriz_perspec[ind][0] + 1920/2, y = matriz_perspec[ind][1] + 1080/2, radius = raio,
                          color = (235,0,255)).draw()
 
 
     for i in range(3):
-        arestas(i, (i%3)+1, matriz_perspec)
+        arestas(i, (i+1)%3, matriz_perspec)
         arestas(i, 3, matriz_perspec)
 
 pg.app.run()
